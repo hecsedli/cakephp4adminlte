@@ -35,9 +35,9 @@ if (file_exists($file)) {
 <body class="hold-transition sidebar-mini layout-fixed text-sm">
     <!-- Site wrapper -->
     <div class="wrapper">
-		<?php echo $this->element('nav-top') ?>
+		<?php echo $this->element('AdminLTE.nav-top') ?>
 
-        <?php echo $this->element('aside-main-sidebar'); ?>
+        <?php echo $this->element('AdminLTE.aside-main-sidebar'); ?>
 
         <!-- =============================================== -->
 
@@ -51,9 +51,9 @@ if (file_exists($file)) {
         </div>
         <!-- /.content-wrapper -->
 
-        <?php echo $this->element('footer'); ?>
+        <?php echo $this->element('AdminLTE.footer'); ?>
         
-        <?php echo $this->element('aside-control-sidebar'); ?>
+        <?php echo $this->element('AdminLTE.aside-control-sidebar'); ?>
 	
 	</div>
 	<!-- ./wrapper -->

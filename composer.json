@@ -1,0 +1,28 @@
+{
+  "name": "hecsedli/cakephp4adminlte",
+  "description": "CakePHP 4.x AdminLTE 3 Theme.",
+  "type": "cakephp-plugin",
+  "keywords": ["cakephp", "templates", "plugin"],
+  "homepage": "https://github.com/hecsedli/cakephp4adminlte",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Csipke Ferenc",
+      "email": "csipke.ferenc@gmail.com",
+      "homepage": "",
+      "role": "Author"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "cakephp/cakephp": "~4.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "AdminLTE\\": "src"
+    }
+  }
+}

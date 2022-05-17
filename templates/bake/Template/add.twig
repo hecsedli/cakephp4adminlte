@@ -1,0 +1,41 @@
+{%
+use Cake\Utility\Inflector;
+%}
+<div class="card card-outline card-success">
+    <div class="card-header">
+    	<h3 class="card-title"><?php echo __('{{ singularHumanName }} {{ Inflector::humanize($action) }}') ?></h3>
+    </div>
+    <?php echo $this->Flash->render(); ?>
+    {{ element('form') }}
+    <div class="overlay" style="display:none">
+        <i class="fas fa-2x fa-sync-alt"></i>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+	
+	$('#{{ pluralVar }}{{ Inflector::humanize($action) }}Form').ajaxForm({
+		replaceTarget: false,
+		target: '#{{ $singularVar }}-1',
+		beforeSubmit: function(arr, $form, options) {
+			$('.overlay').show();
+		},
+		success: function (response) {
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "{{ pluralVar }}", "action" => "indexAjax"], true) ?>",
+				cache: false
+			})
+			.done(function( html ) {
+				$('#{{ $singularVar }}-2').html( html );
+				$('.overlay').hide();
+  			});
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			$('.overlay').hide();
+	  		alert(errorThrown);
+	  	}
+	});
+
+});
+</script>

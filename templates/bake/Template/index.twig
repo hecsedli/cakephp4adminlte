@@ -1,0 +1,111 @@
+{% set datetimepicker = false %}
+{% set select2 = false %}
+{% set fileInput = false %}
+
+{% set fields = Bake.filterFields(fields, schema, modelObject, indexColumns, ['binary', 'text']) %}
+
+
+{% for field in fields %}
+	{% set columnData = Bake.columnData(field, schema) %}
+	{% if columnData.type in ['date', 'datetime'] %}
+		{% set datetimepicker = true %}
+	{% endif %}
+	
+	{% if columnData.type == 'file' %}
+		{% set fileInput = true %}
+	{% endif %}
+
+{% endfor %}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+        	<div class="col-sm-6">
+            	<h1 class="m-0 text-dark"><?php echo __('{{ pluralHumanName }}') ?></h1>
+			</div>
+			<div class="col-sm-6">
+            	<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="<?php echo $this->Url->build(['controller' => 'Pages', 'action' => 'dashboard']); ?>"><?php echo __('Dashboard') ?></a></li>
+					<li class="breadcrumb-item active"><?php echo __('{{ pluralHumanName }}') ?></li>
+            	</ol>
+          	</div>
+        </div>
+    </div>
+</div>
+
+<!-- Main content -->
+<section class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-6 ajax-box" id="{{ singularVar }}-1" data-url="<?php echo $this->Url->build(['action' => 'add']); ?>"></div>
+			<div class="col-lg-6 ajax-box" id="{{ singularVar }}-2" data-url="<?php echo $this->Url->build(['action' => 'indexAjax']); ?>"></div>
+		</div>
+	</div>
+</section>
+
+{% if datetimepicker == true %}
+
+<?php
+$this->Html->css([
+    'AdminLTE./plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'
+  ],
+  ['block' => 'css']);
+
+$this->Html->script([
+  'AdminLTE./plugins/moment/moment.min',
+  'AdminLTE./plugins/moment/locale/hu',
+  'AdminLTE./plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'
+],
+['block' => 'script']);
+?>
+{% endif %}
+
+{% if select2 == true %}
+<?php
+$this->Html->css([
+    'AdminLTE./plugins/select2/css/select2.min',
+    'AdminLTE./plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'
+  ],
+  ['block' => 'css']);
+
+$this->Html->script([
+  'AdminLTE./plugins/select2/js/select2.full.min',
+  'AdminLTE./plugins/select2/js/i18n/hu',
+],
+['block' => 'script']);
+?>
+{% endif %}
+
+{% if fileInput == true %}
+<?php
+$this->Html->script([
+  'AdminLTE./plugins/bs-custom-file-input/bs-custom-file-input.min',
+],
+['block' => 'script']);
+?>
+{% endif %}
+
+
+
+
+<?php $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js',['block' => 'script']); ?>
+
+<?php $this->start('scriptBottom'); ?>
+
+
+<script type="text/javascript">
+$(function(){
+	$('.ajax-box').each(function(){
+		var _this = $(this);
+		
+		$.ajax({
+			url: _this.data('url'),
+			cache: false
+		})
+		.done(function( html ) {
+			_this.html( html );
+  		});
+	});
+});
+</script>
+<?php $this->end(); ?>

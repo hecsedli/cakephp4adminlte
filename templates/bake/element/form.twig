@@ -1,0 +1,63 @@
+{%- set fields = Bake.filterFields(fields, schema, modelObject) %}
+{%- set extras = [] %}
+
+{%- set formFileType = '' %}
+
+{%- for field in fields %}
+	{%- if 'image' in field  or 'file' in field %}
+		{%- set formFileType = "'type' => 'file', " %}
+	{%- endif %}
+{%- endfor %}
+<!-- form start -->
+	<?= $this->Form->create(${{ singularVar }}, [{{formFileType|raw}}'role' => 'form', 'id' => '{{ pluralVar }}{{action}}Form']) ?>
+	<div class="card-body">
+	
+	<?php
+{% for field in fields %}
+{%- if field not in primaryKey %}
+    {%- if keyFields[field] is defined %}
+    	{%- set extras = extras|merge({'select2': 'select2'}) %}
+		{%- set fieldData = Bake.columnData(field, schema) %}
+        {%- if fieldData.null %}
+            echo $this->Form->control('{{ field }}', ['class' => 'form-control select2', 'options' => ${{ keyFields[field] }}, 'empty' => true]);
+            {{- "\n" }}
+        {%- else %}
+            echo $this->Form->control('{{ field }}', ['class' => 'form-control select2', 'options' => ${{ keyFields[field] }}]);
+            {{- "\n" }}
+        {%- endif %}
+    {%- elseif field not in ['created', 'modified', 'updated'] %}
+        {%- set fieldData = Bake.columnData(field, schema) %}
+        {%- if fieldData.type in ['date', 'datetime', 'time'] and fieldData.null %}
+        	{%- set extras = extras|merge({'datetimepicker': 'datetimepicker'}) %}
+            echo $this->Form->control('{{ field }}', ['type' => 'dateTimePicker', 'empty' => true]);
+            {{- "\n" }}
+        {%- elseif 'image' in field  or 'file' in field %}
+        	{%- set extras = extras|merge({'file': 'file'}) %}
+			echo $this->Form->control('{{ field }}', ['type' => 'file', 'placeholder' => __('Válasszon fájlt')]);
+			{{- "\n" }}
+        {%- else %}
+            echo $this->Form->control('{{ field }}');
+            {{- "\n" }}
+        {%- endif %}
+    {%- endif %}
+{%- endif %}
+{%- endfor %}
+
+{%- if associations.BelongsToMany is defined %}
+{%- for assocName, assocData in associations.BelongsToMany %}
+            echo $this->Form->control('{{ assocData.property }}._ids', ['options' => ${{ assocData.variable }}]);
+            {{- "\n" }}
+{%- endfor %}
+{%- endif %}
+    ?>	
+</div>
+<!-- /.card-body -->
+<div class="card-footer">
+	<?= $this->Form->button(__('Cancel'), ['type' => 'reset', 'class' => 'btn btn-default']) ?> 
+    <?= $this->Form->button(__('Save'), ['type' => 'submit', 'class' => 'btn btn-info pull-right']) ?>
+</div>
+<?= $this->Form->end() ?>
+
+{%- for extra in extras %}
+	{{ element(extra) }}
+{%- endfor %}

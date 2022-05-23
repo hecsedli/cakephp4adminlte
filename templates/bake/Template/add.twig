@@ -1,9 +1,6 @@
-{%
-use Cake\Utility\Inflector;
-%}
 <div class="card card-outline card-success">
     <div class="card-header">
-    	<h3 class="card-title"><?php echo __('{{ singularHumanName }} {{ Inflector::humanize($action) }}') ?></h3>
+    	<h3 class="card-title"><?php echo __('{{ singularHumanName }}') . ' ' . __('add')?></h3>
     </div>
     <?php echo $this->Flash->render(); ?>
     {{ element('form') }}
@@ -15,19 +12,19 @@ use Cake\Utility\Inflector;
 <script type="text/javascript">
 $(function () {
 	
-	$('#{{ pluralVar }}{{ Inflector::humanize($action) }}Form').ajaxForm({
+	$('#{{ pluralVar }}AddForm').ajaxForm({
 		replaceTarget: false,
-		target: '#{{ $singularVar }}-1',
+		target: '#{{ singularVar }}-1',
 		beforeSubmit: function(arr, $form, options) {
 			$('.overlay').show();
 		},
 		success: function (response) {
 			$.ajax({
-				url: "<?php echo $this->Url->build(["controller" => "{{ pluralVar }}", "action" => "indexAjax"], true) ?>",
+				url: "<?php echo $this->Url->build(["controller" => "{{ pluralVar }}", "action" => "indexAjax"], ['fullBase' => true]) ?>",
 				cache: false
 			})
 			.done(function( html ) {
-				$('#{{ $singularVar }}-2').html( html );
+				$('#{{ singularVar }}-2').html( html );
 				$('.overlay').hide();
   			});
 		},

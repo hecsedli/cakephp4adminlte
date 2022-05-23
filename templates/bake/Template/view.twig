@@ -1,0 +1,76 @@
+{% set associations = {'BelongsTo': [], 'HasOne': [], 'HasMany': [], 'BelongsToMany': []}|merge(associations) %}
+{% set fieldsData = Bake.getViewFieldsData(fields, schema, associations) %}
+{% set associationFields = fieldsData.associationFields %}
+{% set groupedFields = fieldsData.groupedFields %}
+{% set pK = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
+
+<section class="content-header">
+	<h1><?php echo __('{{ singularHumanName }}'); ?></h1>
+	<ol class="breadcrumb">
+    	<li><?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'index'], ['escape' => false])?> </li>
+	</ol>
+</section>
+{% set done = [] %}
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-solid">
+				<div class="card-header with-border">
+                	<h3 class="card-title"><?php echo __('{{ singularHumanName }}') ?></h3>
+            	</div>
+            	<!-- /.card-header -->
+				<div class="card-body">
+					<dl class="dl-horizontal">
+{% if groupedFields['string'] %}
+{% for field in groupedFields['string'] %}
+{% if associationFields[field] is defined %}
+{% set details = associationFields[field] %}
+                		<dt><?= __('{{ details.property|humanize }}') ?></dt>
+						<td><?= ${{ singularVar }}->has('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></td>
+{% else %}
+                		<dt><?= __('{{ field|humanize }}') ?></dt>
+						<td><?= h(${{ singularVar }}->{{ field }}) ?></td>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if associations.HasOne %}
+{% for alias, details in associations.HasOne %}
+
+                    <dt><?= __('{{ alias|underscore|singularize|humanize }}') ?></dt>
+                    <dd><?= ${{ singularVar }}->has('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></dd>
+
+{% endfor %}
+{% endif %}
+{% if groupedFields.number %}
+{% for field in groupedFields.number %}
+
+                    <dt><?= __('{{ field|humanize }}') ?></dt>
+{% set columnData = Bake.columnData(field, schema) %}
+{% if columnData.null %}
+                    <dd><?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?></dd>
+{% else %}
+                    <dd><?= $this->Number->format(${{ singularVar }}->{{ field }}) ?></dd>
+{% endif %}
+
+{% endfor %}
+{% endif %}
+{% if groupedFields.date %}
+{% for field in groupedFields.date %}
+					<dt><?= __('{{ field|humanize }}') ?></dt>
+                    <dd><?= h(${{ singularVar }}->{{ field }}) ?></dd>
+{% endfor %}
+{% endif %}
+{% if groupedFields.boolean %}
+{% for field in groupedFields.boolean %}
+            		<dt><?= __('{{ field|humanize }}') ?></dt>
+                    <dd><?= ${{ singularVar }}->{{ field }} ? __('Yes') : __('No'); ?></dd>
+{% endfor %}
+{% endif %}
+						
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

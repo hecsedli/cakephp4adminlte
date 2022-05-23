@@ -24,7 +24,7 @@ if (file_exists($file)) {
 		echo $this->Html->css('AdminLTE./plugins/fontawesome-free/css/all.min.css');
 		echo $this->Html->css('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
 		echo $this->Html->css('AdminLTE.adminlte.min');
-		echo $this->Html->css('AdminLTE.cake3adminlte');
+		echo $this->Html->css('AdminLTE.cake4adminlte');
 		
 		echo $this->fetch('css');
 		

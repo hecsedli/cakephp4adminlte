@@ -51,7 +51,7 @@ if (file_exists($file)) {
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-	          <?php echo $this->Html->image('user1-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
+	          <?php echo $this->Html->image('AdminLTE.user1-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -67,7 +67,7 @@ if (file_exists($file)) {
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-	          <?php echo $this->Html->image('user8-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
+	          <?php echo $this->Html->image('AdminLTE.user8-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -83,7 +83,7 @@ if (file_exists($file)) {
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-	          <?php echo $this->Html->image('user3-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
+	          <?php echo $this->Html->image('AdminLTE.user3-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester

@@ -26,20 +26,30 @@ if (file_exists($file)) {
       </li>
     </ul>
 
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -50,7 +60,7 @@ if (file_exists($file)) {
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-	          <?php echo $this->Html->image('AdminLTE.user1-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
+              <?php echo $this->Html->image('AdminLTE.user1-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -66,7 +76,7 @@ if (file_exists($file)) {
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-	          <?php echo $this->Html->image('AdminLTE.user8-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
+              <?php echo $this->Html->image('AdminLTE.user8-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -82,7 +92,7 @@ if (file_exists($file)) {
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-	          <?php echo $this->Html->image('AdminLTE.user3-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
+              <?php echo $this->Html->image('AdminLTE.user3-128x128.jpg', array('class' => 'img-size-50 img-circle mr-3', 'alt' => 'User Avatar')); ?>
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -126,7 +136,12 @@ if (file_exists($file)) {
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
       </li>

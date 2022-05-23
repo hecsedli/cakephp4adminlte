@@ -5,7 +5,7 @@ use Cake\Utility\Inflector;
 $prefix = '';
 if($this->request->getParam('prefix')) $prefix = DS . Inflector::camelize($this->request->getParam('prefix'));
 
-$file = Configure::read('Theme.folder') . DS . 'src' . DS . 'Template' . $prefix . DS . 'Element' . DS . 'aside-main-sidebar.ctp';
+$file = ROOT . DS . 'templates' . $prefix . DS . 'Element' . DS . 'aside-main-sidebar.ctp';
 
 if (file_exists($file)) {
     ob_start();

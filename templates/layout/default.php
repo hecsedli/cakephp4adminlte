@@ -4,7 +4,7 @@ use Cake\Utility\Inflector;
 
 $prefix = DS . Inflector::camelize($this->request->getParam('prefix'));
 
-$file = Configure::read('Theme.folder') . DS . 'src' . DS . 'Template' . $prefix . DS . 'Layout' . DS . 'default.ctp';
+$file = ROOT . DS . 'templates' . $prefix . DS . 'Layout' . DS . 'default.ctp';
 
 if (file_exists($file)) {
     ob_start();

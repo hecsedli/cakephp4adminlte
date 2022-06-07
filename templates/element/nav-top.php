@@ -4,7 +4,7 @@ use Cake\Utility\Inflector;
 $prefix = '';
 if($this->request->getParam('prefix')) $prefix = DS . Inflector::camelize($this->request->getParam('prefix'));
 
-$file = ROOT . DS . 'templates' . $prefix . DS . 'Element' . DS . 'nav-top.ctp';
+$file = ROOT . DS . 'templates' . $prefix . DS . 'element' . DS . 'nav-top.php';
 
 if (file_exists($file)) {
     ob_start();

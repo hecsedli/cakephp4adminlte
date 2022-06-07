@@ -2,9 +2,10 @@
 use Cake\Core\Configure;
 use Cake\Utility\Inflector;
 
-$prefix = DS . Inflector::camelize($this->request->getParam('prefix'));
+$prefix = '';
+if($this->request->getParam('prefix')) $prefix = DS . Inflector::camelize($this->request->getParam('prefix'));
 
-$file = ROOT . DS . 'templates' . $prefix . DS . 'Layout' . DS . 'default.ctp';
+$file = ROOT . DS . 'templates' . $prefix . DS . 'layout' . DS . 'default.php';
 
 if (file_exists($file)) {
     ob_start();

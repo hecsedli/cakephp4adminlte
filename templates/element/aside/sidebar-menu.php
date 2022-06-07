@@ -4,7 +4,7 @@ use Cake\Utility\Inflector;
 $prefix = '';
 if($this->request->getParam('prefix')) $prefix = DS . Inflector::camelize($this->request->getParam('prefix'));
 
-$file = ROOT . DS . 'templates' . $prefix . DS . 'Element' . DS . 'aside' . DS . 'sidebar-menu.ctp';
+$file = ROOT . DS . 'templates' . $prefix . DS . 'element' . DS . 'aside' . DS . 'sidebar-menu.php';
 
 if (file_exists($file)) {
     ob_start();
